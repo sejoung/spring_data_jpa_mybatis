@@ -28,14 +28,15 @@ class SampleRepositoryTest {
 
     @Test
     void 정상() {
-        var sample = Sample.builder().name("메롱").registerDateTime(LocalDateTime.now()).build();
+        var sample = Sample.builder().sampleName("메롱").registerDateTime(LocalDateTime.now())
+            .build();
 
         sampleRepository.save(sample);
 
         sampleMapper.selectSampleList().forEach(
             sampleDTO -> {
                 log.debug("{}", sampleDTO);
-                Assertions.assertEquals(sample.getKey(), sampleDTO.getKey(), "잘못된 키입니다.");
+                Assertions.assertEquals(sample.getSampleKey(), sampleDTO.getKey(), "잘못된 키입니다.");
             }
         );
 

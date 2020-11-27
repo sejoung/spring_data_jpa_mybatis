@@ -22,18 +22,18 @@ public class Sample {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "key")
-    private Long key;
+    @Column(name = "sample_key")
+    private Long sampleKey;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "sampleName")
+    private String sampleName;
 
     @Column(name = "registerDateTime")
     private LocalDateTime registerDateTime;
 
     @Builder
-    private Sample(String name, LocalDateTime registerDateTime) {
-        this.name = name;
+    private Sample(String sampleName, LocalDateTime registerDateTime) {
+        this.sampleName = sampleName;
         this.registerDateTime = registerDateTime;
     }
 }

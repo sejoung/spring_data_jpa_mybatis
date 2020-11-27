@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.sejoung.test.sample.mapper.MemberMapper">
+    <resultMap id="MemberDTOResult" type="com.github.sejoung.test.sample.dto.MemberDTO">
+        <id property="memberId" column="memberId"/>
+        <result property="name" column="name"/>
+        <result property="createDate" column="createDate"/>
+        <collection property="details" column="memberId" select="selectMemberDetailListXML"/>
+    </resultMap>
+
+    <select id="selectMemberListXML" resultMap="MemberDTOResult">
+        select member_id as memberId, name, create_dt as createDate from MEMBER
+    </select>
+
+    <select id="selectMemberDetailListXML"
+        resultType="com.github.sejoung.test.sample.dto.MemberDetailDTO">
+        select member_detail_id as memberDetailId, type, description from MEMBER_DETAIL where member_id = #{memberId}
+    </select>
+
+</mapper>

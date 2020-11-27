@@ -14,4 +14,9 @@
         <setting name="defaultStatementTimeout" value="25000"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
+
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+    </typeHandlers>
 </configuration>
