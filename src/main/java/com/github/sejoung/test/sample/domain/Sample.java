@@ -20,20 +20,20 @@ import lombok.ToString;
 @ToString
 public class Sample {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sample_key")
-    private Long sampleKey;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "sample_key")
+  private Long sampleKey;
 
-    @Column(name = "sampleName")
-    private String sampleName;
+  @Column(name = "sampleName")
+  private String sampleName;
 
-    @Column(name = "registerDateTime")
-    private LocalDateTime registerDateTime;
+  @Column(name = "registerDateTime")
+  private LocalDateTime registerDateTime;
 
-    @Builder
-    private Sample(String sampleName, LocalDateTime registerDateTime) {
-        this.sampleName = sampleName;
-        this.registerDateTime = registerDateTime;
-    }
+  @Builder
+  private Sample(String sampleName, LocalDateTime registerDateTime) {
+    this.sampleName = sampleName;
+    this.registerDateTime = registerDateTime;
+  }
 }

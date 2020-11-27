@@ -11,10 +11,10 @@ import lombok.ToString;
 @ToString
 public class SampleDTO {
 
-    private Long key;
+  private Long key;
 
-    private String name;
+  private String name;
 
-    private LocalDateTime registerDateTime;
-    
+  private LocalDateTime registerDateTime;
+
 }

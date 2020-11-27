@@ -12,8 +12,8 @@ import lombok.ToString;
 @ToString
 public class MemberDTO {
 
-    private Long memberId;
-    private String name;
-    private LocalDateTime createDate;
-    private List<MemberDetailDTO> details;
+  private Long memberId;
+  private String name;
+  private LocalDateTime createDate;
+  private List<MemberDetailDTO> details;
 }

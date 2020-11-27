@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface SampleMapper {
 
-    List<SampleDTO> selectSampleList();
+  List<SampleDTO> selectSampleList();
 }

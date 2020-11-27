@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -19,29 +20,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 @AutoConfigureMybatis
 class SampleRepositoryTest {
 
-    @Autowired
-    private SampleRepository sampleRepository;
+  @Autowired
+  private SampleRepository sampleRepository;
 
-    @Autowired
-    private SampleMapper sampleMapper;
+  @Autowired
+  private SampleMapper sampleMapper;
+
+  @Autowired
+  private TestEntityManager entityManager;
+
+  @Test
+  void 정상() {
+    var sample = Sample.builder().sampleName("메롱").registerDateTime(LocalDateTime.now())
+      .build();
+    entityManager.persist(sample);
+    entityManager.flush();
+    sampleMapper.selectSampleList().forEach(
+      sampleDTO -> {
+        log.debug("{}", sampleDTO);
+        Assertions.assertEquals(sample.getSampleKey(), sampleDTO.getKey(), "잘못된 키입니다.");
+      }
+    );
+
+    sampleRepository.findAll().forEach(s -> log.debug("{}", s));
 
 
-    @Test
-    void 정상() {
-        var sample = Sample.builder().sampleName("메롱").registerDateTime(LocalDateTime.now())
-            .build();
-
-        sampleRepository.save(sample);
-
-        sampleMapper.selectSampleList().forEach(
-            sampleDTO -> {
-                log.debug("{}", sampleDTO);
-                Assertions.assertEquals(sample.getSampleKey(), sampleDTO.getKey(), "잘못된 키입니다.");
-            }
-        );
-
-        sampleRepository.findAll().forEach(s -> log.debug("{}", s));
-
-
-    }
+  }
 }

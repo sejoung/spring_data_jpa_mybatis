@@ -3,6 +3,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.sejoung.test.sample.mapper.SampleMapper">
     <select id="selectSampleList" resultType="com.github.sejoung.test.sample.dto.SampleDTO">
-        select key, name, registerDateTime from SAMPLE
+        select sample_key as key, sampleName as name, registerDateTime from SAMPLE
     </select>
 </mapper>

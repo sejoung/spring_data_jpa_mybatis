@@ -23,50 +23,47 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMybatis
 class MemberMapperTest {
 
-    @Autowired
-    private MemberMapper memberMapper;
+  @Autowired
+  private MemberMapper memberMapper;
 
-    @Autowired
-    private TestEntityManager entityManager;
+  @Autowired
+  private TestEntityManager entityManager;
 
-    @Transactional
-    @DisplayName("XML 설정")
-    @Test
-    void selectMemberListXML() {
+  @Transactional
+  @DisplayName("XML 설정")
+  @Test
+  void selectMemberListXML() {
 
-        var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
+    saveData();
 
-        entityManager.persist(member);
-        entityManager
-            .persist(MemberDetail.builder().description("레고").type("장난감").member(member).build());
-        entityManager
-            .persist(
-                MemberDetail.builder().description("플레이모빌").type("장난감").member(member).build());
-        entityManager.flush();
+    List<MemberDTO> memberList = memberMapper.selectMemberListXML();
+    log.debug("memberList {}", memberList);
+    Assertions.assertThat(memberList.size()).isOne();
+    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+  }
 
-        List<MemberDTO> memberList = memberMapper.selectMemberListXML();
-        log.debug("memberList {}", memberList);
-        Assertions.assertThat(memberList.size()).isOne();
-        Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
-    }
+  @Transactional
+  @DisplayName("어너테이션 설정")
+  @Test
+  void selectMemberList() {
 
-    @Transactional
-    @DisplayName("어너테이션 설정")
-    @Test
-    void selectMemberList() {
+    saveData();
+    List<MemberDTO> memberList = memberMapper.selectMemberList();
+    log.debug("memberList {}", memberList);
+    Assertions.assertThat(memberList.size()).isOne();
+    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+  }
 
-        var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
+  void saveData() {
 
-        entityManager.persist(member);
-        entityManager
-            .persist(MemberDetail.builder().description("레고").type("장난감").member(member).build());
-        entityManager
-            .persist(
-                MemberDetail.builder().description("플레이모빌").type("장난감").member(member).build());
-        entityManager.flush();
-        List<MemberDTO> memberList = memberMapper.selectMemberList();
-        log.debug("memberList {}", memberList);
-        Assertions.assertThat(memberList.size()).isOne();
-        Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
-    }
+    var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
+
+    entityManager.persist(member);
+    entityManager
+      .persist(MemberDetail.builder().description("레고").type("장난감").member(member).build());
+    entityManager
+      .persist(
+        MemberDetail.builder().description("플레이모빌").type("장난감").member(member).build());
+    entityManager.flush();
+  }
 }

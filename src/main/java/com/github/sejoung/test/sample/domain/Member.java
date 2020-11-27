@@ -24,22 +24,22 @@ import lombok.ToString;
 @ToString
 public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "member_id")
-    private Long memberId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "member_id")
+  private Long memberId;
 
-    private String name;
+  private String name;
 
-    @Column(name = "create_dt")
-    private LocalDateTime createDate;
+  @Column(name = "create_dt")
+  private LocalDateTime createDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
-    private List<MemberDetail> details = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+  private List<MemberDetail> details = new ArrayList<>();
 
-    @Builder
-    private Member(String name, LocalDateTime createDate) {
-        this.name = name;
-        this.createDate = createDate;
-    }
+  @Builder
+  private Member(String name, LocalDateTime createDate) {
+    this.name = name;
+    this.createDate = createDate;
+  }
 }

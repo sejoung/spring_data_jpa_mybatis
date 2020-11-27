@@ -14,24 +14,24 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface MemberMapper {
 
-    List<MemberDTO> selectMemberListXML();
+  List<MemberDTO> selectMemberListXML();
 
-    List<MemberDetailDTO> selectMemberDetailListXML(Long memberId);
+  List<MemberDetailDTO> selectMemberDetailListXML(Long memberId);
 
-    @Select("select member_id as memberId, name, create_dt as createDate from MEMBER")
-    @Results(value = {
-        @Result(property = "memberId", column = "memberId"),
-        @Result(property = "name", column = "name"),
-        @Result(property = "createDate", column = "createDate"),
-        @Result(property = "details", column = "memberId", javaType = List.class, many = @Many(select = "selectMemberDetailList"))
-    })
-    List<MemberDTO> selectMemberList();
+  @Select("select member_id as memberId, name, create_dt as createDate from MEMBER")
+  @Results(value = {
+    @Result(property = "memberId", column = "memberId"),
+    @Result(property = "name", column = "name"),
+    @Result(property = "createDate", column = "createDate"),
+    @Result(property = "details", column = "memberId", javaType = List.class, many = @Many(select = "selectMemberDetailList"))
+  })
+  List<MemberDTO> selectMemberList();
 
-    @Select("select member_detail_id as memberDetailId, type, description from MEMBER_DETAIL where member_id = #{memberId}")
-    @Results(value = {
-        @Result(property = "memberDetailId", column = "memberDetailId"),
-        @Result(property = "type", column = "type"),
-        @Result(property = "description", column = "description")
-    })
-    List<MemberDetailDTO> selectMemberDetailList(Long memberId);
+  @Select("select member_detail_id as memberDetailId, type, description from MEMBER_DETAIL where member_id = #{memberId}")
+  @Results(value = {
+    @Result(property = "memberDetailId", column = "memberDetailId"),
+    @Result(property = "type", column = "type"),
+    @Result(property = "description", column = "description")
+  })
+  List<MemberDetailDTO> selectMemberDetailList(Long memberId);
 }

@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 public class MemberDetailDTO {
 
-    private Long memberDetailId;
-    private String type;
-    private String description;
+  private Long memberDetailId;
+  private String type;
+  private String description;
 }
