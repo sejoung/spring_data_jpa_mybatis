@@ -54,7 +54,18 @@ class MemberMapperTest {
     Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
   }
 
-  void saveData() {
+  @Transactional
+  @DisplayName("XML 설정 조인 쿼리")
+  @Test
+  void selectMemberListJoinXML() {
+    saveData();
+    List<MemberDTO> memberList = memberMapper.selectMemberListJoinXML();
+    log.debug("memberList {}", memberList);
+    Assertions.assertThat(memberList.size()).isOne();
+    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+  }
+
+  private void saveData() {
 
     var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
 

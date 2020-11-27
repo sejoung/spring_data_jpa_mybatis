@@ -34,4 +34,8 @@ public interface MemberMapper {
     @Result(property = "description", column = "description")
   })
   List<MemberDetailDTO> selectMemberDetailList(Long memberId);
+
+
+  List<MemberDTO> selectMemberListJoinXML();
+
 }

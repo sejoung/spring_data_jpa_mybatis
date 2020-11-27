@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.sejoung.test.sample.mapper.MemberMapper">
-    <resultMap id="MemberDTOResult" type="com.github.sejoung.test.sample.dto.MemberDTO">
-        <id property="memberId" column="memberId"/>
-        <result property="name" column="name"/>
-        <result property="createDate" column="createDate"/>
-        <collection property="details" column="memberId" select="selectMemberDetailListXML"/>
-    </resultMap>
+  <resultMap id="MemberDTOResult" type="com.github.sejoung.test.sample.dto.MemberDTO">
+    <id property="memberId" column="memberId"/>
+    <result property="name" column="name"/>
+    <result property="createDate" column="createDate"/>
+    <collection property="details" column="memberId" select="selectMemberDetailListXML"/>
+  </resultMap>
 
-    <select id="selectMemberListXML" resultMap="MemberDTOResult">
+  <select id="selectMemberListXML" resultMap="MemberDTOResult">
         select member_id as memberId, name, create_dt as createDate from MEMBER
     </select>
 
-    <select id="selectMemberDetailListXML"
-        resultType="com.github.sejoung.test.sample.dto.MemberDetailDTO">
+  <select id="selectMemberDetailListXML"
+    resultType="com.github.sejoung.test.sample.dto.MemberDetailDTO">
         select member_detail_id as memberDetailId, type, description from MEMBER_DETAIL where member_id = #{memberId}
     </select>
+
+  <resultMap id="MemberDTOJoinResult" type="com.github.sejoung.test.sample.dto.MemberDTO">
+    <id property="memberId" column="memberId"/>
+    <result property="name" column="name"/>
+    <result property="createDate" column="createDate"/>
+    <collection property="details" column="memberId"
+      ofType="com.github.sejoung.test.sample.dto.MemberDetailDTO">
+      <id property="memberDetailId" column="memberDetailId"/>
+      <result property="type" column="type"/>
+      <result property="description" column="description"/>
+    </collection>
+  </resultMap>
+  <select id="selectMemberListJoinXML" resultMap="MemberDTOJoinResult">
+        select M.member_id as memberId, M.name, M.create_dt as createDate, MD.member_detail_id as memberDetailId, MD.type, MD.description from MEMBER M inner join MEMBER_DETAIL MD on M.member_id = MD.member_id
+  </select>
 
 </mapper>
