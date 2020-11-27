@@ -34,7 +34,7 @@ class MemberMapperTest {
     @Test
     void selectMemberListXML() {
 
-        var member = Member.builder().name("장난아님").createDate(LocalDateTime.now()).build();
+        var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
 
         entityManager.persist(member);
         entityManager
@@ -55,7 +55,7 @@ class MemberMapperTest {
     @Test
     void selectMemberList() {
 
-        var member = Member.builder().name("장난아님").createDate(LocalDateTime.now()).build();
+        var member = Member.builder().name("완구").createDate(LocalDateTime.now()).build();
 
         entityManager.persist(member);
         entityManager
