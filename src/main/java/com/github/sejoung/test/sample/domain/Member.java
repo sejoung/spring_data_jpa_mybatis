@@ -38,10 +38,8 @@ public class Member {
     private List<MemberDetail> details = new ArrayList<>();
 
     @Builder
-    private Member(String name, LocalDateTime createDate,
-        List<MemberDetail> details) {
+    private Member(String name, LocalDateTime createDate) {
         this.name = name;
         this.createDate = createDate;
-        this.details = details;
     }
 }
