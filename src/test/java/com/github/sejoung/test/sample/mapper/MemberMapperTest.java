@@ -1,12 +1,11 @@
 package com.github.sejoung.test.sample.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.sejoung.test.sample.domain.Member;
 import com.github.sejoung.test.sample.domain.MemberDetail;
-import com.github.sejoung.test.sample.dto.MemberDTO;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +35,10 @@ class MemberMapperTest {
 
     saveData();
 
-    List<MemberDTO> memberList = memberMapper.selectMemberListXML();
+    var memberList = memberMapper.selectMemberListXML();
     log.debug("memberList {}", memberList);
-    Assertions.assertThat(memberList.size()).isOne();
-    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+    assertThat(memberList.size()).isOne();
+    assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
   }
 
   @Transactional
@@ -48,10 +47,10 @@ class MemberMapperTest {
   void selectMemberList() {
 
     saveData();
-    List<MemberDTO> memberList = memberMapper.selectMemberList();
+    var memberList = memberMapper.selectMemberList();
     log.debug("memberList {}", memberList);
-    Assertions.assertThat(memberList.size()).isOne();
-    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+    assertThat(memberList.size()).isOne();
+    assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
   }
 
   @Transactional
@@ -59,10 +58,10 @@ class MemberMapperTest {
   @Test
   void selectMemberListJoinXML() {
     saveData();
-    List<MemberDTO> memberList = memberMapper.selectMemberListJoinXML();
+    var memberList = memberMapper.selectMemberListJoinXML();
     log.debug("memberList {}", memberList);
-    Assertions.assertThat(memberList.size()).isOne();
-    Assertions.assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
+    assertThat(memberList.size()).isOne();
+    assertThat(memberList.get(0).getDetails().size()).isEqualTo(2);
   }
 
   private void saveData() {
